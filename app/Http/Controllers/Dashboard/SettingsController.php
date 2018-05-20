@@ -20,6 +20,7 @@ use Exception;
 use GrahamCampbell\Binput\Facades\Binput;
 use Illuminate\Log\Writer;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Lang;
@@ -356,6 +357,14 @@ class SettingsController extends Controller
             }
         }
 
+        if (isset($parameters['stylesheet'])) {
+            if ($stylesheet = Binput::get('stylesheet', null, false, false)) {
+                $setting->set('stylesheet', $stylesheet);
+            } else {
+                $setting->delete('stylesheet');
+            }
+        }
+
         if (Binput::hasFile('app_banner')) {
             $this->handleUpdateBanner($setting);
         }
@@ -366,6 +375,7 @@ class SettingsController extends Controller
             'remove_banner',
             'header',
             'footer',
+            'stylesheet',
         ];
 
         try {
@@ -382,6 +392,10 @@ class SettingsController extends Controller
 
         if (Binput::has('app_locale')) {
             Lang::setLocale(Binput::get('app_locale'));
+        }
+
+        if (Binput::has('always_authenticate')) {
+            Artisan::call('route:clear');
         }
 
         return Redirect::back()->withSuccess(trans('dashboard.settings.edit.success'));

@@ -188,7 +188,7 @@ return [
             'background-fills'        => 'crwdns1215:0crwdne1215:0',
             'banner-background-color' => 'crwdns1216:0crwdne1216:0',
             'banner-padding'          => 'crwdns1217:0crwdne1217:0',
-            'fullwidth-banner'        => 'crwdns1218:0crwdne1218:0',
+            'fullwidth-banner'        => 'crwdns1442:0crwdne1442:0',
             'text-color'              => 'crwdns1219:0crwdne1219:0',
             'dashboard-login'         => 'crwdns1220:0crwdne1220:0',
             'reds'                    => 'crwdns1221:0crwdne1221:0',
